@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiap-deployment
+  labels:
+    app: fiaptravel
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: fiaptravel
+  template:
+    metadata:
+      labels:
+        app: fiaptravel
+    spec:
+      containers:
+        - name: fiaptravel
+          image: "marcocouzin/fiap_travel"
+          ports:
+            - name: http
+              containerPort: 80
