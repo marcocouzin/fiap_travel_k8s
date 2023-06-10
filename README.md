@@ -16,6 +16,22 @@
 
 ### SETTING UP THE APPLICATION ENVIRONMENT:
 
+1. Download the set up files
+```
+    git clone https://github.com/marcocouzin/fiap_travel_k8s.git
+```
+
+###### and then, run:
+
+```
+    cd fiap_travel_k8s
+```
+
+
+2. Create a deployment resource
+3. Create a load balancer to expose the service
+4. To destroy the environment, run:
+
 ```
     1. Download the set up files
     git clone https://github.com/marcocouzin/fiap_travel_k8s.git
