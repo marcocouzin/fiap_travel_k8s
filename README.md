@@ -1,17 +1,26 @@
 # FIAP TRAVEL
 
 ### CREATING THE AZURE ENVIRONMENT:
+1. Create a cluster using the Azure Cloud Shell
 ```
-    1. Create a cluster using the Azure Cloud Shell
     az group create --name gpakstravel --location eastus && az aks create --name akstravel --resource-group gpakstravel --node-count 2 --generate-ssh-keys 
+```
 
-    2. Connect to the cluster
+2. Connect to the cluster
+```
     az aks get-credentials --resource-group gpakstravel --name akstravel
-    
-    3. Run the Weave Works graphic administration tool
+```
+
+3. Run the Weave Works graphic administration tool
+```
     kubectl apply -f https://github.com/weaveworks/scope/releases/download/v1.13.2/k8s-scope.yaml && kubectl patch svc weave-scope-app -n weave -p '{"spec": {"type": "LoadBalancer"}}'
     
     ! To check the installation and get the external IP, run: kubectl get svc -n weave
+```
+
+###### ! To check the installation and get the external IP, run: kubectl get svc -n weave
+```
+    kubectl get svc -n weave
 ```
 
 ### SETTING UP THE APPLICATION ENVIRONMENT:
