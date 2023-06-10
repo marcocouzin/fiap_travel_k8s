@@ -14,8 +14,6 @@
 3. Run the Weave Works graphic administration tool
 ```
     kubectl apply -f https://github.com/weaveworks/scope/releases/download/v1.13.2/k8s-scope.yaml && kubectl patch svc weave-scope-app -n weave -p '{"spec": {"type": "LoadBalancer"}}'
-    
-    ! To check the installation and get the external IP, run: kubectl get svc -n weave
 ```
 
 ###### ! To check the installation and get the external IP, run: kubectl get svc -n weave
