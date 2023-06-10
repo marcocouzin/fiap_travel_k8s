@@ -20,36 +20,50 @@
 ```
     git clone https://github.com/marcocouzin/fiap_travel_k8s.git
 ```
-
 ###### and then, run:
 
 ```
     cd fiap_travel_k8s
 ```
 
-
 2. Create a deployment resource
-3. Create a load balancer to expose the service
-4. To destroy the environment, run:
-
 ```
-    1. Download the set up files
-    git clone https://github.com/marcocouzin/fiap_travel_k8s.git
-    and then, run: cd fiap_travel_k8s
-    
-    2. Create a deployment resource
     kubectl create -f deploy_fiap_travel.yml 
-    
-    3. Create a load balancer to expose the service
-    kubectl create -f svc_page_loadbalancer.yml
-    
-    ! To check the service, run: kubectl get service
-    ! Helpful commands:
-        kubectl get deploy
-        kubectl get replicasets
-        kubectl get pods
-        kubectl get svc
-    
-    4. To destroy the environment, run:
+```
+
+3. Create a load balancer to expose the service
+```
+    kubectl create -f svc_page_loadbalancer.yml    
+```
+
+4. To destroy the environment, run:
+```
     az aks delete --yes --name akstravel --resource-group gpakstravel && az group delete --yes --resource-group gpakstravel
+```
+
+
+### Helpful Commands
+- Check the service
+```    
+    kubectl get service
+```
+
+- List the deployment resources
+```    
+        kubectl get deploy
+```
+
+- List the ReplicaSets resources
+```    
+    kubectl get replicasets
+```
+
+- List the Pods resources
+```    
+        kubectl get pods
+```
+
+- List the SVCs resources
+```    
+        kubectl get svc
 ```
