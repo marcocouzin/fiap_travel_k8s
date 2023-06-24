@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiap-bff-deployment
+  labels:
+    app: fiap-bff-travel
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fiap-bff-travel
+  template:
+    metadata:
+      labels:
+        app: fiap-bff-travel
+    spec:
+      containers:
+        - name: fiap-bff-travel
+          image: "marcocouzin/fiap_travel_bff"
+          ports:
+            - name: http
+              containerPort: 8081
