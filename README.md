@@ -43,17 +43,17 @@ cd fiap_travel_k8s/deploy_fiap_bff_travel
 
 2. Create a deployment resource
 ```
-kubectl create -f deploy_fiap_fed_travel_app.yml 
+kubectl create -f deploy_fiap_bff_travel_app.yml 
 ```
 
 3. Create a load balancer to expose the service
 ```
-kubectl create -f deploy_fiap_fed_travel_loadbalancer.yml    
+kubectl create -f deploy_fiap_bff_travel_loadbalancer.yml    
 ```
 
 4. To destroy the environment, run:
 ```
-az aks delete --yes --name aksfedtravel --resource-group gpaksfedtravel && az group delete --yes --resource-group gpaksfedtravel && az group delete --yes --resource-group NetworkWatcherRG
+az aks delete --yes --name aksbfftravel --resource-group gpaksbfftravel && az group delete --yes --resource-group gpaksbfftravel && az group delete --yes --resource-group NetworkWatcherRG
 ```
 
 
