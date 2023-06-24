@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: fiap-service
+  name: fiap-fed-service
 spec:
   selector:
-    app: fiaptravel
+    app: fiap_fed_travel
   ports:
     - protocol: "TCP"
       port: 80
