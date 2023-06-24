@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: fiap-deployment
   labels:
-    app: fiap_fed_travel
+    app: fiap-fed-travel
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: fiap_fed_travel
+      app: fiap-fed-travel
   template:
     metadata:
       labels:
-        app: fiap_fed_travel
+        app: fiap-fed-travel
     spec:
       containers:
-        - name: fiap_fed_travel
+        - name: fiap-fed-travel
           image: "marcocouzin/fiap_travel_fed"
           ports:
             - name: http

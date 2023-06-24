@@ -44,7 +44,7 @@ http://<external_ip>
 ###### and then, run:
 
 ```
-    cd fiap_travel_k8s/deploy_fiap_fed_travel_app
+    cd fiap_travel_k8s/deploy_fiap_fed_travel
 ```
 
 2. Create a deployment resource

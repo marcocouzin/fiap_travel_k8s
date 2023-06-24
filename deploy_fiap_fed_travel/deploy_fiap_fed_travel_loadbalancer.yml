@@ -4,7 +4,7 @@ metadata:
   name: fiap-fed-service
 spec:
   selector:
-    app: fiap_fed_travel
+    app: fiap-fed-travel
   ports:
     - protocol: "TCP"
       port: 80
