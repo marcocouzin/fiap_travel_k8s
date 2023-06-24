@@ -63,7 +63,6 @@ http://<external_ip>
 ```
 
 #
-#
 ### Helpful Commands
 - Check the service
 ```    
