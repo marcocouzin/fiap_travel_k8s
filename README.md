@@ -30,7 +30,7 @@ kubectl get pod -A
 ```
     kubectl get svc -n weave
 ```
--> Access the graphic tool
+- Access the graphic tool
 ```
 http://<external_ip>
 ```
