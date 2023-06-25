@@ -1,14 +1,14 @@
 # FIAP TRAVEL
 
-###### The target of this solution is show how to integrate a front-end with a back-end using the Microsfot Azure resources.
+###### O Objetivo deste projeto é mostrar a intgração entre o front-end e o back-end utilizando os recursos da Microsoft Azure.
 <br />
 
 
-### 1. GET THE APPLICATIONS RESOURCES:
-###### You will need the environment configuration files. 
-###### These files contain all the deployment information necessary to set up the environment of the applications.
+### 1. Obtendo os recursos para deploy da solução
+###### Você precisará dos arquivos de configuração do ambiente. 
+###### Estes arquivos contém todas as informações para configuração do ambiente da solução
 
-1. Download the set up files
+1. Baixando os arquivos de configuração
 ```
 git clone https://github.com/marcocouzin/fiap_travel_k8s.git
 ```
@@ -20,14 +20,14 @@ git clone https://github.com/marcocouzin/fiap_travel_k8s.git
 
 
 
-### 2. SET UP A CLUSTER AND A KUBERNETS
-###### All the solution will run in a cluster with Kubernets
-####  To install this solution, do:
-1. Create a cluster using the Azure Cloud Shell
+### 2. CONFIGURANDO O CLUSTER E O KUBERNETES
+###### A maior parte da aplicação rodará no cluster Kubernete
+####  Para instalar a solução, execute os comandos abaixo:
+1. Criar um cluster utilizando o Azure Cloud Shell
 ```
 az group create --name gpakstravel --location eastus && az aks create --name akstravel --resource-group gpakstravel --node-count 2 --generate-ssh-keys
 ```
-2. Connect to the cluster
+2. Conecte ao cluster
 ```
 az aks get-credentials --resource-group gpakstravel --name akstravel
 ```
@@ -41,21 +41,21 @@ az aks get-credentials --resource-group gpakstravel --name akstravel
 
 
 
-### 3. ADMINISTRATIVE GRAPHIC TOOL 
-###### An easy way to see what happening in your environment is using a tool called Weave Scope.
-###### You just can install this tool if you have a Load Balancer Service running.
-####  To install this tool, do:
+### 3. FERRAMENTA GRÁFICA DE ADMINISTRAÇÃO 
+###### Uma forma fácil de visualizar o que está acontecendo no ambiente é utilizar uma ferramenta chamada Weave Scope.
+###### É pré-requisito a criação do AKS
+####  Para instalar a solução, execute os comandos abaixo:
 
-1. Install the Weave Works graphic administration tool
+1. Instalar o Weave Works
 ```
 kubectl apply -f https://github.com/weaveworks/scope/releases/download/v1.13.2/k8s-scope.yaml && kubectl patch svc weave-scope-app -n weave -p '{"spec": {"type": "LoadBalancer"}}'
 ```
-2. Get the external IP to see the interface tool
+2. Obtenha o IP externo gerado na instalação
 ```
 kubectl get svc -n weave
 ```
 ![img_2.png](img_2.png)
-3. Open a browser and type the external IP like below:
+3. Abra um browser e digite o endereço IP obtido no passo anterior
 ```
 http://<external_ip>
 ```
@@ -69,35 +69,35 @@ http://<external_ip>
 
 
 
-### 4. DEPLOY THE BACK-END (BFF) SOLUTION:
-###### This solution provide a back-end service for the front-end
-####  To install this solution, do:
-1. Access the folder that contain the deployment files of the back-end
+### 4. INSTALANDO A SOLUÇÃO DE BACK-END (BFF):
+###### Está solução prove um serviço de back-end para o front-end.
+####  Para instalar a solução, execute os comandos abaixo:
+1. Acesse a pasta que contém os arquivos de deployment
 ```
 cd ~/fiap_travel_k8s/deploy_fiap_bff_travel/
 ```
-2. Create a deployment resource
+2. Criar o recurso para deploy
 ```
 kubectl create -f deploy_fiap_bff_travel_app.yml
 ```
-3. Create a load balancer to expose the service
+3. Criar o load balancer para expor o serviço
 ```
 kubectl create -f deploy_fiap_bff_travel_loadbalancer.yml
 ```
-4. Get the external IP that was created
+4. Obtenha o IP externo, do balanceador, gerado na instalação
 ```
 kubectl get service
 ```
 ![img_3.png](img_3.png)
-5. Try the solution. Open a browser and access the URL below:
+5. Teste a solução. Abra um browser e acesse a URL conforme abaixo:
 ```
 http://<external_ip>:8081/swagger-ui/index.html
 ```
 ![img_4.png](img_4.png)
-- OR check int the Weave Scope
+- OU Verifique no Weave Scope
 
 ![img_6.png](img_6.png)
-6. Update the Back-end external IP in your environment variable for the front-end be able to access the back-end
+6. Atualize o IP externo do Back-end external no serviço utilizado para controlar as variáveis de ambiente para que o front-end possa acessar o back-end
 ```
 https://www.mockable.io/
 ```
@@ -110,33 +110,33 @@ https://www.mockable.io/
 
 
 
-### 5. CREATING THE FRONT-END (FED) AZURE ENVIRONMENT:
-###### This solution provide a front-end service
-####  To install this solution, do:
-1. Access the folder that contain the deployment files of the back-end
+### 5. INSTALANDO A SOLUÇÃO DE FRONT-END (FED):
+###### Está solução prove um serviço de front-end
+####  Para instalar a solução, execute os comandos abaixo:
+1. Acesse a pasta que contém os arquivos de deployment
 ```
 cd ~/fiap_travel_k8s/deploy_fiap_fed_travel/
 ```
-2. Create a deployment resource
+2. Criar o recurso para deploy
 ```
 kubectl create -f deploy_fiap_fed_travel_app.yml
 ```
-3. Create a load balancer to expose the service
+3. Criar o load balancer para expor o serviço
 ```
 kubectl create -f deploy_fiap_fed_travel_loadbalancer.yml
 ```
-4. Get the external IP that was created
+4. Obtenha o IP externo, do balanceador, gerado na instalação
 ```
 kubectl get service
 ```
 --- evidence ---
-5. Try the solution. Open a browser and access the URL below:
+5. Teste a solução. Abra um browser e acesse a URL conforme abaixo:
 ```
 http://<external_ip>
 ```
 ![img_1.png](img_1.png)
 
-- OR check in the Weave Scope
+- OU Verifique no Weave Scope
 
 ![img_7.png](img_7.png)
 
@@ -148,8 +148,8 @@ http://<external_ip>
 
 
 
-### 6. DESTROY ALL RESOURCES
-####  To delete all resources, do:
+### 6. EXCLUINDO OS RECURSOS
+####  Para excluir a solução, execute os comandos abaixo:
 ```
 az aks delete --yes --name akstravel --resource-group gpakstravel && az group delete --yes --resource-group gpakstravel && az group delete --yes --resource-group NetworkWatcherRG
 ```
@@ -163,24 +163,28 @@ az aks delete --yes --name akstravel --resource-group gpakstravel && az group de
 
 
 
-### 7. HELPFUL COMMANDS
-- Check the service
+### 7. COMANDO ÚTEIS
+- Lista os serviços
 ```
 kubectl get service
 ```
-- List the deployment resources
+- Lista os recursos de deployment
 ```
 kubectl get deploy 
 ```
-- List the ReplicaSets resources
+- Lista os recursos de ReplicaSets
 ```
 kubectl get replicasets
 ```
-- List the Pods resources
+- Lista os pods
 ```
 kubectl get pods
 ```
-List the SVCs resources
+Lists os nós
 ```
-kubectl get svc
+kubectl get nodes
+```
+Lista os nameSpace
+```
+kubectl get namespaces
 ```
