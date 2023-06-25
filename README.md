@@ -117,20 +117,20 @@ https://www.mockable.io/
 ```
 cd ~/fiap_travel_k8s/deploy_fiap_fed_travel/
 ```
-4. Create a deployment resource
+2. Create a deployment resource
 ```
 kubectl create -f deploy_fiap_fed_travel_app.yml
 ```
-5. Create a load balancer to expose the service
+3. Create a load balancer to expose the service
 ```
 kubectl create -f deploy_fiap_fed_travel_loadbalancer.yml
 ```
-6. Get the external IP that was created
+4. Get the external IP that was created
 ```
 kubectl get service
 ```
 --- evidence ---
-7. Try the solution. Open a browser and access the URL below:
+5. Try the solution. Open a browser and access the URL below:
 ```
 http://<external_ip>
 ```
