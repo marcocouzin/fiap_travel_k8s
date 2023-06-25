@@ -55,7 +55,7 @@ kubectl apply -f https://github.com/weaveworks/scope/releases/download/v1.13.2/k
 kubectl get svc -n weave
 ```
 ![img_2.png](img_2.png)
-3. Access the graphic interface
+3. Open a browser and type the external IP like below:
 ```
 http://<external_ip>
 ```
