@@ -153,3 +153,34 @@ http://<external_ip>
 ```
 az aks delete --yes --name akstravel --resource-group gpakstravel && az group delete --yes --resource-group gpakstravel && az group delete --yes --resource-group NetworkWatcherRG
 ```
+
+
+
+
+<br /><br /><br /><br /><br />
+
+
+
+
+
+### 7. HELPFUL COMMANDS
+- Check the service
+```
+kubectl get service
+```
+- List the deployment resources
+```
+kubectl get deploy 
+```
+- List the ReplicaSets resources
+```
+kubectl get replicasets
+```
+- List the Pods resources
+```
+kubectl get pods
+```
+List the SVCs resources
+```
+kubectl get svc
+```
