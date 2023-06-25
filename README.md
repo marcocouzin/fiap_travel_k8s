@@ -1,184 +1,155 @@
 # FIAP TRAVEL
 
-
-
-### CREATING THE BACK-END AZURE ENVIRONMENT:
-1. Create a cluster using the Azure Cloud Shell
-```
-az group create --name gpaksbfftravel --location eastus && az aks create --name aksbfftravel --resource-group gpaksbfftravel --node-count 2 --generate-ssh-keys 
-```
+###### The target of this solution is show how to integrate a front-end with a back-end using the Microsfot Azure resources.
 <br />
 
-2. Connect to the cluster
-```
-az aks get-credentials --resource-group gpaksbfftravel --name aksbfftravel
-```  
-<br />
 
-- Check the nodes
-```
-kubectl get nodes
-```
-```
-kubectl get namespaces
-```
-```
-kubectl get pod -A
-```
-
-
-<br /><br />
-### SETTING UP THE APPLICATION ENVIRONMENT:
+### 1. GET THE APPLICATIONS RESOURCES:
+###### You will need the environment configuration files. 
+###### These files contain all the deployment information necessary to set up the environment of the applications.
 
 1. Download the set up files
 ```
 git clone https://github.com/marcocouzin/fiap_travel_k8s.git
 ```
-###### and then, run:
-```
-cd fiap_travel_k8s/deploy_fiap_bff_travel
-```
 
 
 
-2. Create a deployment resource
-```
-kubectl create -f deploy_fiap_bff_travel_app.yml 
-```
-
-3. Create a load balancer to expose the service
-```
-kubectl create -f deploy_fiap_bff_travel_loadbalancer.yml    
-```
-
-4. To destroy the environment, run:
-```
-az aks delete --yes --name aksbfftravel --resource-group gpaksbfftravel && az group delete --yes --resource-group gpaksbfftravel && az group delete --yes --resource-group NetworkWatcherRG
-```
-
-
-<br /><br />
-### RUN THE APPLICATION
-1. Get the external ip address
-```
-kubectl get service
-```
-
-2. Open a browser and access the application
-
-
-
-<br/><br/>
+<br /><br /><br /><br /><br />
 
 
 
 
-
-
-
-
-
-<br /><br /><br />
-### CREATING THE FRONT-END AZURE ENVIRONMENT:
+### 2. SET UP A CLUSTER AND A KUBERNETS
+###### All the solution will run in a cluster with Kubernets
+####  To install this solution, do:
 1. Create a cluster using the Azure Cloud Shell
 ```
-az group create --name gpaksfedtravel --location eastus && az aks create --name aksfedtravel --resource-group gpaksfedtravel --node-count 2 --generate-ssh-keys 
+az group create --name gpakstravel --location eastus && az aks create --name akstravel --resource-group gpakstravel --node-count 2 --generate-ssh-keys
 ```
-
 2. Connect to the cluster
 ```
-az aks get-credentials --resource-group gpaksfedtravel --name aksfedtravel
-```
-- Check the nodes
-```
-kubectl get nodes
-```
-```
-kubectl get namespaces
-```
-```
-kubectl get pod -A
+az aks get-credentials --resource-group gpakstravel --name akstravel
 ```
 
-3. Run the Weave Works graphic administration tool
+
+
+
+<br /><br /><br /><br /><br />
+
+
+
+
+
+### 3. ADMINISTRATIVE GRAPHIC TOOL 
+###### An easy way to see what happening in your environment is using a tool called Weave Scope.
+###### You just can install this tool if you have a Load Balancer Service running.
+####  To install this tool, do:
+
+1. Install the Weave Works graphic administration tool
 ```
 kubectl apply -f https://github.com/weaveworks/scope/releases/download/v1.13.2/k8s-scope.yaml && kubectl patch svc weave-scope-app -n weave -p '{"spec": {"type": "LoadBalancer"}}'
 ```
-
-###### ! To check the installation and get the external IP, run: kubectl get svc -n weave
+2. Get the external IP to see the interface tool
 ```
 kubectl get svc -n weave
 ```
-- Access the graphic tool
+![img_2.png](img_2.png)
+3. Access the graphic interface
 ```
 http://<external_ip>
 ```
+![img_5.png](img_5.png)
 
 
 
-<br /><br />
-### SETTING UP THE APPLICATION ENVIRONMENT:
+<br /><br /><br /><br /><br />
 
-1. Download the set up files
+
+
+
+
+### 4. DEPLOY THE BACK-END (BFF) SOLUTION:
+###### This solution provide a back-end service for the front-end
+####  To install this solution, do:
+1. Access the folder that contain the deployment files of the back-end
 ```
-git clone https://github.com/marcocouzin/fiap_travel_k8s.git
+cd ~/fiap_travel_k8s/deploy_fiap_bff_travel/
 ```
-###### and then, run:
-
-```
-cd fiap_travel_k8s/deploy_fiap_fed_travel
-```
-
 2. Create a deployment resource
 ```
-kubectl create -f deploy_fiap_fed_travel_app.yml 
+kubectl create -f deploy_fiap_bff_travel_app.yml
 ```
-
 3. Create a load balancer to expose the service
 ```
-kubectl create -f deploy_fiap_fed_travel_loadbalancer.yml    
+kubectl create -f deploy_fiap_bff_travel_loadbalancer.yml
 ```
-
-4. To destroy the environment, run:
-```
-az aks delete --yes --name aksfedtravel --resource-group gpaksfedtravel && az group delete --yes --resource-group gpaksfedtravel && az group delete --yes --resource-group NetworkWatcherRG
-```
-
-<br /><br />
-### RUN THE APPLICATION
-1. Get the external ip address
+4. Get the external IP that was created
 ```
 kubectl get service
 ```
-![img.png](img.png)
-2. Open a browser and access the application
+![img_3.png](img_3.png)
+5. Try the solution. Open a browser and access the URL below:
+```
+http://<external_ip>:8081/swagger-ui/index.html
+```
+![img_4.png](img_4.png)
+- OR check int the Weave Scope
 
+![img_6.png](img_6.png)
+6. Update the Back-end external IP in your environment variable for the front-end be able to access the back-end
+```
+https://www.mockable.io/
+```
+
+
+
+<br /><br /><br /><br /><br />
+
+
+
+
+
+### 5. CREATING THE FRONT-END (FED) AZURE ENVIRONMENT:
+###### This solution provide a front-end service
+####  To install this solution, do:
+1. Access the folder that contain the deployment files of the back-end
+```
+cd ~/fiap_travel_k8s/deploy_fiap_fed_travel/
+```
+4. Create a deployment resource
+```
+kubectl create -f deploy_fiap_fed_travel_app.yml
+```
+5. Create a load balancer to expose the service
+```
+kubectl create -f deploy_fiap_fed_travel_loadbalancer.yml
+```
+6. Get the external IP that was created
+```
+kubectl get service
+```
+--- evidence ---
+7. Try the solution. Open a browser and access the URL below:
+```
+http://<external_ip>
+```
 ![img_1.png](img_1.png)
 
-<br/><br/>
+- OR check in the Weave Scope
 
-### Helpful Commands
-- Check the service
-```    
-kubectl get service
+![img_7.png](img_7.png)
+
+
+
+
+<br /><br /><br /><br /><br />
+
+
+
+
+### 6. DESTROY ALL RESOURCES
+####  To delete all resources, do:
 ```
-
-- List the deployment resources
-```    
-kubectl get deploy
-```
-
-- List the ReplicaSets resources
-```    
-kubectl get replicasets
-```
-
-- List the Pods resources
-```    
-kubectl get pods
-```
-
-- List the SVCs resources
-```    
-kubectl get svc
+az aks delete --yes --name akstravel --resource-group gpakstravel && az group delete --yes --resource-group gpakstravel && az group delete --yes --resource-group NetworkWatcherRG
 ```
